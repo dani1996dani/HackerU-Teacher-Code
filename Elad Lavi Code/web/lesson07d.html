@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    function init(){
+      /*
+      var div1 = document.getElementById("div1");
+      div1.innerHTML = "bla bla";
+      */
+
+    }
+    /*
+    $(document).ready(function(){
+      $("#div1").html("bla bla1");
+    });
+    */
+    $(function(){
+      $("#div1").html("bla bla1");
+      $("#btn1").click(function(){
+        alert("I was clicked");
+      });
+    });
+
+
+</script>
+</head>
+<body>
+  <div id="div1"></div>
+  <input type="button" value="click me" id="btn1" />
+<body>
+</html>

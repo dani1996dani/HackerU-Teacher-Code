@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		function btnClick(){
+			alert('button was clicked');
+
+		}
+	</script>
+</head>
+
+<body>
+	<form action="lesson03c.html" method="GET">
+		First Name:<br/>
+		<input type="text" name="first_name" />
+		<br/>
+		Last Name:<br/>
+		<input type="text" name="last_name" />
+		<br/>
+		choose topping:<br/>
+		<input type="radio" name="topping" value="garlic" checked>
+		Garlic<br/>
+		<input type="radio" name="topping" value="mashroom">
+		Mashroom<br/>
+		<input type="radio" name="topping" value="onion">
+		Onion<br/>
+		<br/>
+
+		<select name="color">
+			<option value="choose" selected>Choose</option>
+			<option value="red">Red</option>
+			<option value="green">Green</option>
+			<option value="yellow">Yellow</option>
+			<option value="purple">Purple</option>
+			<option value="brown">Brown</option>
+		</select>
+
+		<br/>
+
+		<textarea name="comments" rows="10" cols="30">
+
+		</textarea>
+
+		<br/>
+
+		<input type="button" onclick="btnClick()" value="click me" />
+		<br/>
+		<input type="submit" value="Submit" />
+
+	</form>
+</body>
+
+</html>

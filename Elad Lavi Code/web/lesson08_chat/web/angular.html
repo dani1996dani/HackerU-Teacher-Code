@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myController">
+        <p>{{greeting}}</p>
+        <button ng-click="myFunc()">click me</button>
+        <br/>
+        <div>{{counter}}</div>
+    </div>
+
+    <script>
+        var myApp = angular.module('myApp', []);
+        myApp.controller('myController',function ($scope,$http) {
+            $scope.counter = 100;
+            $scope.myFunc = function(){
+                $scope.counter++;
+            };
+            $http.get("angular").then(function (response) {
+                $scope.greeting = response.data;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+</head>
+<body>
+  <div ng-app="myApp" ng-controller="myController">
+    <p>Name: <input type="text" ng-model="name" /></p>
+    <p style="border:1px solid black;height:40px;" ng-bind="name"></p>
+    <p>five plus five is {{5 + 5}}</p>
+    <p style="background-color: {{myColor}};">{{'hello ' + name}}</p>
+    <p>{{student.firstName + ' ' + student.lastName}}</p>
+    <p ng-bind="student.firstName"></p>
+    <p>{{student.firstName | uppercase}}</p>
+    <p>{{grades[0]}}<p>
+    grades:<br/>
+    <select>
+      <option ng-repeat="s in students | filter: name">{{s.firstName + ' ' + s.lastName}}</option>
+    </select>
+  </div>
+  <script>
+    var myApp = angular.module('myApp',[]);
+
+    myApp.controller('myController',function($scope){
+      $scope.grades = [34,234,432,122];
+      $scope.students = [
+        {firstName:"Elad", lastName:"Lavi"},
+        {firstName:"Ben", lastName:"Behor"}
+      ];
+      $scope.student = {
+        firstName: 'Elad',
+        lastName: 'Lavi'
+      };
+      $scope.name = 'Elad Lavi';
+      $scope.myColor = 'yellow';
+
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="lesson08_chat:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/lesson08_chat_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="lesson08_chat/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="lesson08_chat" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$USER_HOME$/Library/apache-tomcat-8.5.27/lib/java-json.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

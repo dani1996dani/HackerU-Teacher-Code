@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		function init(){
+			var courses = [];
+			courses.push({
+				name: "ניהול רשתות ואבטחת מידע בוקר R051117M",
+				instructor: "י. ואזנה",
+				location: "כיתה 02",
+				fromHour: "9:00",
+				toHour: "16:30"
+			});
+			
+			courses.push({
+				name: "מורחב עיצוב גרפי G091117M",
+				instructor: "ר. נקש",
+				location: "כיתה 03",
+				fromHour: "9:00",
+				toHour: "16:30"
+			});
+			
+			courses.push({
+				name: "הדרכת סילבוסים עובדים - צוות שיווק ומכירות",
+				instructor: "",
+				location: "כיתה 04",
+				fromHour: "16:00",
+				toHour: "17:00"
+			});
+			
+			courses.push({
+				name: "בסמ``ח UX- מחזור 9",
+				instructor: "ד. נעים",
+				location: "כיתה 05",
+				fromHour: "9:00",
+				toHour: "17:00"
+			});
+			
+			
+			courses.push({
+				name: "מורחב בניית אתרים W170917M",
+				instructor: "ש.להב",
+				location: "כיתה 06",
+				fromHour: "9:00",
+				toHour: "16:30"
+			});
+			
+			courses.push({
+				name: "ביקור משלחת צא`ד- Chad",
+				instructor: "",
+				location: "כיתה 07",
+				fromHour: "15:00",
+				toHour: "17:00"
+			});
+			
+			courses.push({
+				name: "מורחב בניית אתרים W150218M",
+				instructor: "ג. לביא",
+				location: "כיתה 09",
+				fromHour: "9:00",
+				toHour: "16:30"
+			});
+			
+			var divCourses = document.getElementById("divCourses");
+			var strCourses = "<table><tr><th>שם קורס</th><th>מרצה</th>"+
+				"<th>מיקום</th><th>התחלה</th><th>סיום</th></tr>";
+			
+			
+			
+			for(var i=0;i<courses.length;i++){
+				var course = courses[i];
+				strCourses += "<tr>";
+				strCourses += "<td>" + course.name + "</td>";
+				strCourses += "<td>" + course.instructor + "</td>";
+				strCourses += "<td>" + course.location + "</td>";
+				strCourses += "<td>" + course.fromHour + "</td>";
+				strCourses += "<td>" + course.toHour + "</td>";
+				
+				strCourses += "</tr>";
+			
+			}
+			strCourses += "</table>";
+			divCourses.innerHTML = strCourses;
+			
+		}
+	</script>
+	<style>
+		table{
+			width: 80%;
+			margin: 0 auto;
+		}
+		tr:nth-child(even){
+			background-color: #E0E6F8;
+		}
+		th{
+			background-color: #0B2161;
+			color: white;
+		}
+		table, th, td{
+			border-collapse: collapse;
+			border: 1px solid gray;
+		}
+		th, td{
+			padding: 5px;
+		}
+		th{
+			text-align: right;
+		}
+	</style>
+</head>
+
+
+<body dir="rtl" onload="init()">
+<div id="divCourses"></div>
+</body>
+</html>

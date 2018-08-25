@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Lesson20 Http Chat Server:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lesson20_Http_Chat_Server_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Lesson20 Http Chat Server/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Lesson20 Http Chat Server" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$USER_HOME$/Desktop/java-json.jar" />
+          <element id="file-copy" path="C:/apache-tomcat-8.5.32/lib/mysql-connector-java-5.1.46.jar" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

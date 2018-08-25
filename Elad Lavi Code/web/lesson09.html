@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>More About CSS</title>
+<script>
+  var opacity = 1.0;
+  var deltaOpacity = 0.0;
+  var img1;
+  function init(){
+    img1 = document.getElementById("img1");
+    updateOpacity();
+  }
+
+  function btnFade(){
+    if(deltaOpacity == 0.0){
+      if(opacity == 1.0)
+        deltaOpacity = -0.01;
+      else{//opacity is 0.0
+        deltaOpacity = 0.01;
+      }
+    }else{
+      deltaOpacity *= -1;
+    }
+
+  }
+
+  function updateOpacity(){
+    opacity += deltaOpacity;
+    if(opacity >= 1.0){
+      deltaOpacity = 0.0;
+      opacity = 1.0;
+    }else if(opacity <= 0){
+      deltaOpacity = 0.0;
+      opacity = 0.0;
+    }
+    img1.style.opacity = opacity;
+    setTimeout(updateOpacity, 10);
+
+  }
+
+</script>
+<style>
+
+
+#div1 h3{
+  color: green;
+}
+#div1 > h4{
+  background-color: yellow;
+}
+#div2 + h4{
+  background-color: purple;
+}
+
+#div3 ~ h4{
+  font-size: 40px;
+}
+
+a:hover{
+  background-color: yellow;
+}
+a:active{
+  background-color: purple;
+}
+a:visited{
+  color:green;
+}
+#div3 h5:first-child{
+  background-color: orange;
+}
+img{
+  opacity: 1.0;
+}
+
+</style>
+</head>
+<body onload="init()">
+<img id="img1" src="cnn.png" style="width: 400px; height: 131px;" />
+<br/>
+<input type="button" onclick="btnFade()" value="fade" />
+</br>
+<a href="" id="a1">this is a link</a>
+<div id="div1">
+  <h5>this is a h5 headline</h5>
+  <p><h3>this is a headline descendant of div1</h3></p>
+  <span><h4>this is NOT a direct child of div1</h4></span>
+  <h4>this is a direct child of div1</h4>
+</div>
+<div id="div2">
+  <h4>this tag comes inside div2</h4>
+</div>
+<h4>this tag comes right after div2</h4>
+<h4>this tag comes second after div2</h4>
+
+<h4>this tag comes right after div3</h4>
+<h4>this tag comes second after div3</h4>
+
+<div id="div3">
+    <h5>this is a h5 headline</h5>
+    <h5>this is a h5 second headline</h5>
+    <h5>this is a h5 this headline</h5>
+</div>
+<br/>
+
+</body>
+</html>
+<!--
+  four combinators: space, >, +, ~
+
+  space: descendant
+  >: child
+  +: adjacent
+  ~: sibling
+-->

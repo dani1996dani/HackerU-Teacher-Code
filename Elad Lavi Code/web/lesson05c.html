@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  var ctx;
+  var canvasWidth = 700;
+  var canvasHeight = 380;
+  var circles = [];
+  var colors = ["green", "red", "blue", "yellow", "gray", "purple"];
+  var rangeRadius;
+
+  function addCircle(){
+    var circle = {
+      x: 100,
+      y: 100,
+      velocityX: 2,
+      velocityY: 3,
+      radius: parseInt(rangeRadius.value),
+      color: colors[circles.length % colors.length]
+    };
+    circles.push(circle);
+  }
+
+
+  function init(){
+    var myCanvas = document.getElementById('myCanvas');
+    ctx = myCanvas.getContext("2d");
+    rangeRadius = document.getElementById('rangeRadius');
+    addCircle();
+    render();
+
+  }
+
+  function clearCanvas(){
+    ctx.clearRect(0,0,canvasWidth,canvasHeight);
+  }
+
+  function drawCircle(circle){
+    ctx.beginPath();
+    ctx.arc(circle.x,circle.y,circle.radius,0,Math.PI*2.0);
+    ctx.fillStyle = circle.color;
+    ctx.fill();
+  }
+
+  function render(){
+    clearCanvas();
+    for(var i=0;i<circles.length;i++){
+      var circle = circles[i];
+      circle.x += circle.velocityX;
+      circle.y += circle.velocityY;
+      if(circle.x + circle.radius > canvasWidth){
+        circle.x = canvasWidth - circle.radius;
+        circle.velocityX *= -1;
+      }
+      if(circle.x < circle.radius){
+        circle.x = circle.radius;
+        circle.velocityX *= -1;
+      }
+      if(circle.y + circle.radius > canvasHeight){
+        circle.y = canvasHeight - circle.radius;
+        circle.velocityY *= -1;
+      }
+      if(circle.y < circle.radius){
+        circle.y = circle.radius;
+        circle.velocityY *= -1;
+      }
+      for(var j=i+1;j<circles.length;j++){
+        if(collides(circle,circles[j])){
+          circle.velocityX *= -1;
+          circle.velocityY *= -1;
+          circles[j].velocityX *= -1;
+          circles[j].velocityY *= -1;
+        }
+      }
+      drawCircle(circle);
+    }
+    setTimeout(render, 10);
+  }
+
+
+  function collides(circle1, circle2){
+    var d = distance(circle1.x,circle1.y,circle2.x,circle2.y);
+    var r1 = circle1.radius;
+    var r2 = circle2.radius;
+    return d <= r1 + r2;
+  }
+
+  function distance(x1, y1, x2, y2){
+    var deltaX = x1-x2;
+    var deltaY = y1-y2;
+    return Math.sqrt(deltaX*deltaX + deltaY*deltaY);
+  }
+
+
+</script>
+</head>
+
+<body onload="init()">
+<canvas id="myCanvas" width="700" height="380" style="border: 1px solid gray;">
+</canvas>
+<br/>
+<input onclick="addCircle()" type="button" value="add circle"/>
+<input type="range" min="20" max="40" id="rangeRadius" />
+</body>
+</html>

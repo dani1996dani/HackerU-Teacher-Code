@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  var ctx;
+  var canvasWidth = 700;
+  var canvasHeight = 380;
+  var imgSpaceship, imgFireball;
+  var step = 10;
+  var x,y;
+  var fireBalls = [];
+  var temp = [];
+
+  function init(){
+    var myCanvas = document.getElementById('myCanvas');
+    ctx = myCanvas.getContext("2d");
+
+    /*
+    var fontWidth = 40;
+    ctx.font = fontWidth+"px Courier";
+    var msg = "What exactly didn't you get?";
+
+    var textWidth = fontWidth * msg.length / 1.7;
+    //ctx.fillText(msg,
+    //                (canvasWidth - textWidth) / 2 , canvasHeight / 3);
+    ctx.strokeText(msg,
+                    (canvasWidth - textWidth) / 2 , canvasHeight / 3);
+    */
+    /*
+    var gradient = ctx.createLinearGradient(0,0,canvasWidth,canvasHeight);
+    gradient.addColorStop(0,"aqua");
+      gradient.addColorStop(1,"tomato");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(10,30,canvasWidth-20,250);
+    */
+    imgSpaceship = document.getElementById('imgSpaceship');
+    imgFireball = document.getElementById('imgFireball');
+    x = (canvasWidth-imgSpaceship.width)/2;
+    y = canvasHeight-imgSpaceship.height;
+    ctx.drawImage(imgSpaceship, x, y);
+    renderFireBalls();
+  }
+
+  function renderFireBalls(){
+    ctx.clearRect(0,0,canvasWidth, canvasHeight);
+
+    for(var i=0;i<fireBalls.length;i++){
+      var fb = fireBalls[i];
+      ctx.drawImage(imgFireball, fb.xPos, fb.yPos);
+      fb.yPos -= step;
+    }
+
+    while (fireBalls.length > 0)
+      temp.push(fireBalls.pop());
+
+
+    while (temp.length > 0) {
+      var fb = temp.pop();
+      if(fb.yPos >= -imgFireball.height)
+        fireBalls.push(fb);
+    }
+    ctx.drawImage(imgSpaceship, x, y);
+    setTimeout(renderFireBalls, 10);
+  }
+
+  function key(event){
+    ctx.clearRect(0,0,canvasWidth, canvasHeight);
+
+    switch (event.keyCode) {
+      case 65:
+
+      case 97: //left
+        x -= step;
+        if(x < 0)
+          x = 0;
+        break;
+      case 119: //up
+        y -= step;
+        if(y < 0)
+            y = 0;
+        break;
+      case 100: //right
+        x += step;
+        if(x + imgSpaceship.width > canvasWidth)
+                x = canvasWidth - imgSpaceship.width;
+        break;
+      case 120: //down
+        y += step;
+        if(y + imgSpaceship.height > canvasHeight)
+              y = canvasHeight - imgSpaceship.height;
+        break;
+      case 32: //fire
+        fireBalls.push({
+          xPos: x+imgSpaceship.width/2-imgFireball.width/2,
+          yPos: y
+        });
+        break;
+
+      default:
+
+    }
+    ctx.drawImage(imgSpaceship, x, y);
+  }
+
+
+
+</script>
+</head>
+
+<body onload="init()" onkeypress="key(event)">
+<canvas id="myCanvas" width="700" height="380" style="border: 1px solid gray;">
+</canvas>
+<img id="imgSpaceship" src="spaceship.png" style="display: none;" />
+<img id="imgFireball" src="fireball.png" style="display: none;" />
+</body>
+</html>

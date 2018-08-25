@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  var ctx;
+  var canvasWidth = 700;
+  var canvasHeight = 400;
+
+  function init(){
+    var myCanvas = document.getElementById('myCanvas');
+    ctx = myCanvas.getContext("2d");
+
+    for(var i=0;i<4;i++)
+        drawMagenDavid(20+i*160,80);
+  }
+  function drawMagenDavid(x,y){
+
+    /*
+    drawCentralSideEqualTriangle(x, y, true);
+    drawCentralSideEqualTriangle(x, y+200, false);
+    */
+    var right = 70;
+    var down = 80;
+    drawTriangle(x,y,x+right,y+100);
+    drawTriangle(x,y+down,x+right,y+down-100);
+  }
+
+  function drawCentralSideEqualTriangle(x,y,isUpsideDown){
+    ctx.moveTo(x,y);
+    var right = canvasWidth/2.0-x;
+    var u = isUpsideDown ? 1 : -1;
+    ctx.lineTo(x + right,y + right*Math.sqrt(3)*u);
+    ctx.lineTo(x + 2*right, y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+
+  }
+
+  function drawTriangle(x1,y1,x2,y2){
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x2,y2);
+    ctx.lineTo(2*x2-x1,y1);
+    ctx.lineTo(x1,y1);
+    ctx.stroke();
+  }
+
+</script>
+</head>
+
+<body onload="init()">
+<canvas id="myCanvas" width="700" height="400" style="border: 1px solid gray;">
+</canvas>
+</body>
+</html>

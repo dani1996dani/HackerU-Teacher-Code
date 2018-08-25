@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>More JavaScript</title>
+  <script>
+      //random number between 0(inclusive) and 1(exclusive)
+      //var x = Math.random();
+      //alert(x);
+      /*
+      exercise 1:
+      write a function that takes two parameters,
+      "from", "to" which are integers,
+      and returns a random number between "from"
+      and "to" (including "from", not including "to").
+      besides basic JavaScript, use Math.floor() and
+      Math.random().
+
+      exercise 2:
+      write a function that takes as a parameter an array,
+      and shuffles the elements of the array, so that
+      each item has equal probability to be positioned
+      anywhere in the array.
+
+      */
+
+      function random(from, to){
+        return Math.floor(Math.random() * (to - from)) + from;
+      }
+
+      function shuffle(arr){
+        var n = arr.length;
+
+        for(var k=0;k<100*n;k++){
+          var i = random(0, n);
+          var j = random(0, n);
+          var temp = arr[i];
+          arr[i] = arr[j];
+          arr[j] = temp;
+        }
+      }
+
+      var a = [1,2,3,4,5,6,7,8];
+      shuffle(a);
+      alert(a);
+
+
+
+
+
+  </script>
+</head>
+
+<body>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+  var ctx;
+  var canvasWidth = 700;
+  var canvasHeight = 380;
+  var x = 100;
+  var y = 100;
+  var radius = 40;
+  var color = "green";
+  var step = 10;
+
+  function init(){
+    var myCanvas = document.getElementById('myCanvas');
+    ctx = myCanvas.getContext("2d");
+
+    clearCanvas();
+    drawCircle(170,120,40,"red");
+  }
+
+  function clearCanvas(){
+    ctx.clearRect(0,0,canvasWidth,canvasHeight);
+  }
+
+  function drawCircle(){
+    ctx.beginPath();
+    ctx.arc(x,y,radius,0,Math.PI*2.0);
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  function moveUp(){
+    y -= step;
+    if(y-radius<0)
+      y = radius;
+    clearCanvas();
+    drawCircle();
+  }
+
+  function moveDown(){
+    y += step;
+    if(y+radius>canvasHeight)
+      y = canvasHeight - radius;
+    clearCanvas();
+    drawCircle();
+  }
+
+  function moveLeft(){
+    x -= step;
+    if(x-radius<0)
+      x = radius;
+    clearCanvas();
+    drawCircle();
+  }
+
+  function moveRight(){
+    x += step;
+    if(x+radius>canvasWidth)
+      x = canvasWidth - radius;
+    clearCanvas();
+    drawCircle();
+  }
+
+  function test(event){
+    if(event.keyCode == 13){
+      alert('enter was pressed');
+    }else{
+      alert('pressed ' + event.keyCode);
+    }
+    //a = 97=left
+    //w = 119=up
+    //d = 100=right
+    //x = 120=down
+  }
+
+</script>
+</head>
+
+<body onload="init()" onkeypress="test(event)">
+<canvas id="myCanvas" width="700" height="380" style="border: 1px solid gray;">
+</canvas>
+<div style="width: 65px; height: 60px;position:absolute;background-color:lightgray;">
+
+  <img onclick="moveUp()" src="up.png" style="width:22px;height:14px;position:absolute;left:20px;top:5px;" />
+  <img onclick="moveDown()" src="down.png" style="width:22px;height:14px;position:absolute;left:20px;top:43px;" />
+  <img onclick="moveLeft()" src="left.png" style="width:14px;height:22px;position:absolute;left:7px;top:20px;" />
+  <img onclick="moveRight()" src="right.png" style="width:14px;height:22px;position:absolute;left:40px;top:20px;" />
+</div>
+</body>
+</html>

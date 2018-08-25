@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat</title>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script>
+    $(function(){
+      $("#btnSend").click(sendMessage);
+      $("#txtMessage").keydown(function(event){
+        if(event.which == 13){
+          sendMessage();
+        }
+      });
+    });
+
+    function sendMessage(){
+      var message = $("#txtMessage").val();
+      if(message.length == 0){
+        alert("must type something...");
+        return;
+      }
+
+      $("#txtMessage").val("");
+    }
+  </script>
+  <style>
+  #divChat{
+    width: 80%;
+    max-width: 600px;
+    height: 300px;
+    border: 1px solid gray;
+    margin: 0 auto;
+    overflow-y: scroll;
+  }
+  #divSendMessage{
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  #txtMessage{
+    width: 90%;
+  }
+  </style>
+</head>
+
+<body>
+  <h3 style="text-align: center;">Chat</h3>
+  <div id="divChat"></div>
+  <div id="divSendMessage">
+    <input type="text" id="txtMessage" />
+    <input type="button" value="send" id="btnSend" />
+  </div>
+</body>
+</html>

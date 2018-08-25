@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	table, th, td{
+		border: 1px solid gray;
+		border-collapse: collapse;
+	}
+	th, td{
+		padding: 5px;
+	}
+	th{
+		text-align: left;
+		background-color: #0B2161;
+		color: white;
+	}
+	table{
+		margin: 0 auto;
+	}
+</style>
+<script>
+	function init(){
+		
+		var x = [3,7.8,15.3,20];
+		x.push(120);
+		var sum = 0;
+		for(var i=0;i<x.length;i++)
+			sum += x[i];
+		alert(sum);
+		
+		var div1 = document.getElementById('div1');
+		var s = '<table>';
+		s += '<tr><th>col1</th></tr>';
+		for(var i=0;i<=100;i++)
+			s += '<tr'+(i%2==0 ? 
+			 ' style="background-color:yellow;"' 
+			 : '')+'><td>'+(i+100)+
+			 '</td></tr>';
+		s += '</table>';
+		div1.innerHTML = s;
+	}
+</script>
+</head>
+
+<body onload="init()">
+	<div id="div1">
+		
+	</div>
+	<!--
+	<table style="width:80%;">
+		<tr>
+			<th>date</th>
+			<th>amount</th>
+			<th>description</th>
+			<th>transaction id</th>
+		</tr>
+		<tr>
+			<td rowspan="2">1/1/2018</td>
+			<td>823.4</td>
+			<td>paycheck</td>
+			<td>345fdx2</td>
+		</tr>
+		<tr>
+			
+			<td>-254.3</td>
+			<td>ATM</td>
+			<td>gefg434234</td>
+		</tr>
+		<tr>
+			<td>total</td>
+			<td>570</td>
+			<td colspan="2">(2 transactions)</td>
+		</tr>
+	</table>
+	-->
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    var div1IsShown = true;
+    function init(){
+      /*
+      var div1 = document.getElementById("div1");
+      div1.innerHTML = "bla bla";
+      */
+
+    }
+    /*
+    $(document).ready(function(){
+      $("#div1").html("bla bla1");
+    });
+    */
+    $(function(){
+      $("#div1").html("bla bla1  dfsfvgdfg dfgdf<br/> vdf vbsdfk jskj<br/> fshdkfj ");
+      /*
+      $("#btn1").mouseenter(function(){
+        //alert("I was clicked");
+        $("#div1").hide(5000,function(){
+          alert("animation done..");
+        });
+        //var div1 = document.getElementById("div1");
+        //div1.style.display = "none";
+        //$("#div1").show();
+      });
+      $("#btn1").mouseleave(function(){
+        $("#div1").show(5000);
+      });
+      */
+      $("#btn1").click(function(){
+        /*
+        if(div1IsShown){
+          //$("#div1").hide();
+          $("#div1").fadeOut(3000);
+          div1IsShown = false;
+        }else{
+          //$("#div1").show();
+          $("#div1").fadeIn(3000);
+          div1IsShown = true;
+        }
+        */
+        $("#div1").fadeToggle(2000);
+        //$("#div1").toggle(1000);
+
+        //div1IsShown = !div1IsShown;
+      });
+      $("#starUserName").hide();
+      $("#txtUserName").focus(function(){
+        $("#div1").html("please type user name");
+      });
+      $("#starUserName").css("color", "red");
+      $("#txtUserName").blur(function(){
+        if($("#txtUserName").val().length < 3 ){
+          $("#starUserName").show();
+        }else{
+          $("#starUserName").hide();
+        }
+      });
+      /*
+      $("#txtPassword").blur(function(){
+        alert("password lost focus");
+      });
+      $("#txtPassword").focus(function(){
+        alert("password got focus");
+      });
+      $("#txtPassword").click(function(){
+        alert("password was clicked");
+      });
+      */
+      $("#txtPassword").on({
+        blur: function(){
+          alert("password lost focus");
+        },
+        focus: function(){
+          alert("password got focus");
+        },
+        click: function(){
+          alert("password was clicked");
+        }
+      });
+
+    });
+
+
+
+</script>
+</head>
+<body>
+  <input type="button" value="click me" id="btn1" />
+  <br/>
+  <input type="text" id="txtUserName" /><span id="starUserName">*</span>
+  <br/>
+  <input type="password" id="txtPassword"/>
+  <div id="div1">some content of my div</div>
+
+<body>
+</html>

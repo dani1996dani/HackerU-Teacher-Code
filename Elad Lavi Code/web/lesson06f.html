@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Local Storage</title>
+  <script>
+    var div1;
+    var counter = 0;
+    var localStorageSupport;
+    function init(){
+      div1 = document.getElementById('div1');
+      localStorageSupport = typeof(Storage) !== "undefined";
+      if(localStorageSupport){
+        var temp = localStorage.getItem("counter");
+        if(temp !== null){
+            counter = Number(temp);
+        }
+
+      }else{
+        alert("no local storage supoprt");
+      }
+      updateDiv();
+    }
+
+
+    function btnIncrease(){
+      counter++;
+      saveCounter();
+      updateDiv();
+    }
+
+    function updateDiv(){
+      div1.innerHTML = "counter="+counter;
+    }
+
+    function saveCounter(){
+      if(localStorageSupport){
+        localStorage.setItem("counter", counter);
+        localStorage.counter = counter;
+      }
+    }
+
+    function btnReset(){
+      counter = 0;
+      saveCounter();
+      updateDiv();
+    }
+
+
+  </script>
+</head>
+
+<body onload="init()">
+  <div id="div1"></div>
+  <br/>
+  <input type="button" value="increase" onclick="btnIncrease()" />
+  <input type="button" value="reset" onclick="btnReset()" />
+</body>
+</html>

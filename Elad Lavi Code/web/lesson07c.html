@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    //some more JS things:
+
+    var person = {
+      firstName: "elad",
+      lastName: "lavi"
+    };
+    //alert(objectToString(person));
+    var p2 = new Object();
+    p2.firstName = "Yossi";
+    var p3 = p2;
+    p3.firstName = "Yonni";
+    var arr = ["firstName", "lastName"];
+    //alert(p2[arr[0]]);
+    //alert(p2.firstName);
+    var x = person.firstName;
+
+    /*
+    var nums = [564345,35,6343,345,6,3,534,545,72,235,346];
+    var max = 0;
+    for(num in nums){
+      if(num > max)
+        max = num;
+    }
+    */
+
+    function objectToString(obj){
+      var str = '';
+      for(prop in obj){
+        str += prop + '=' + obj[prop] + ' ';
+      }
+      return str;
+    }
+
+    /*
+    var circle = {
+      x: 5,
+      y: 8,
+      velocityX: 2,
+      velocityY: 7,
+      color: "red",
+      radius: 3
+    };
+    circle.show = function(){
+      alert('test ' + this.x);
+    };
+
+    circle.show();
+    */
+
+    function Circle(x,y,velocityX,velocityY,radius,color){
+      this.x = x;
+      this.y = y;
+      this.velocityX = velocityX;
+      this.velocityY = velocityY;
+      this.radius = radius;
+      this.color = color;
+      this.show = function(){
+        alert('test ' + this.x);
+      };
+      this.move = function(){
+        this.x += velocityX;
+        this.y += velocityY;
+        //check
+      };
+    }
+    var c1 = new Circle(2,3,4,5,8,"red");
+    c1.show();
+
+</script>
+</head>
+<body>
+<body>
+</html>

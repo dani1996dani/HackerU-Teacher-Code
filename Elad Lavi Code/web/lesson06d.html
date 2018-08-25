@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Geolocation</title>
+  <script>
+    var divLocation;
+
+
+
+    function init(){
+      divLocation = document.getElementById('divLocation');
+
+      divLocation.innerHTML = "bla bla bla";
+      getLocation();
+    }
+
+    function showError(error){
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+
+          break;
+        case error.POSITION_UNAVAILABLE:
+
+          break;
+        default:
+
+      }
+    }
+
+    function getLocation(){
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+
+      }else{
+        divLocation.innerHTML = "your browser is too old";
+      }
+    }
+
+    function showPosition(position){
+      divLocation.innerHTML = "latitude: " + position.coords.latitude +
+        "longitude: " + position.coords.longitude;
+    }
+
+
+
+  </script>
+</head>
+
+<body onload="init()">
+  <div id="divLocation"></div>
+</body>
+</html>

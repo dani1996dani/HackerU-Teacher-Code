@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+		var txtUserName;
+		function init(){
+				txtUserName = document.getElementById('txtUserName');
+		}
+		function btnClick(){
+			var userName = txtUserName.value;
+			alert('hello '+userName);
+			txtUserName.value = "";
+
+		}
+	</script>
+</head>
+
+<body onload="init()">
+	User Name:</br>
+	<input type="text" id="txtUserName" />
+	<br/>
+	<input type="button" value="click me" onclick="btnClick()" />
+</body>
+</html>

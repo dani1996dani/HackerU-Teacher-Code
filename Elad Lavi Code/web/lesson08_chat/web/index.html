@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script>
+
+        var messages = [];
+        var userName;
+        var password;
+
+        $(function(){
+            $("#btnSend").click(sendMessage);
+            $("#txtMessage").keydown(function(event){
+                if(event.which == 13){
+                    sendMessage();
+                }
+            });
+            $("#divChatContainer").hide();
+            //receive();
+        });
+
+        function receive() {
+
+            $.get("MainServlet?receive&"+messages.length+"&"+userName+"&"+password,function (data, status) {
+                if(data.length != 0) {
+                    var receivedMessages = JSON.parse(data);
+                    for (var i = 0; i < receivedMessages.length; i++) {
+                        messages.push(receivedMessages[i]);
+                    }
+                    var str = "";
+                    if (receivedMessages.length > 0) {
+                        for (var i = 0; i < messages.length; i++) {
+                            str += messages[i].sender + ":<br/>";
+                            str += decodeURIComponent(messages[i].content) + "<br/>";
+                        }
+                        $("#divChat").html(str);
+                        scrollToBottom();
+                    }
+                }
+                setTimeout(receive, 500);
+            });
+
+
+        }
+
+        function scrollToBottom() {
+            var divChat = document.getElementById("divChat");
+            divChat.scrollTop = divChat.scrollHeight;
+        }
+
+        function sendMessage(){
+            var message = $("#txtMessage").val();
+            message = encodeURIComponent(message);
+            if(message.length == 0){
+                alert("must type something...");
+                return;
+            }
+            $.get("MainServlet?send&"+message+"&"+userName+"&"+password,function(data, status){
+                if(status == "success"){
+                    if(data == "ok"){
+                        $("#txtMessage").val("");
+                    }
+                }
+            });
+
+        }
+
+
+        function btnSignupLogin(signup) {
+            userName = $("#txtUserName").val();
+            password = $("#txtPassword").val();
+            $.get("MainServlet?"+(signup ? "signup" : "login")+"&"+userName+"&"+password, function (data, status) {
+                if(status == "success" && data == "ok"){
+                    $("#divLogin").hide();
+                    $("#divChatContainer").show();
+                    receive();
+                }else{
+                    alert("balagan");
+                }
+            });
+
+        }
+    </script>
+    <style>
+        #divChat{
+            width: 80%;
+            max-width: 600px;
+            height: 300px;
+            border: 1px solid gray;
+            margin: 0 auto;
+            overflow-y: scroll;
+        }
+        #divSendMessage{
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #txtMessage{
+            width: 90%;
+        }
+    </style>
+
+</head>
+<body>
+<h3 style="text-align: center;">Chat</h3>
+<div id="divLogin">
+    username: <input type="text" id="txtUserName" /><br/>
+    password: <input type="password" id="txtPassword" /><br/>
+    <input type="button" value="signup" id="btnSignup" onclick="btnSignupLogin(true)"/>
+    <input type="button" value="login" id="btnLogin" onclick="btnSignupLogin(false)"/>
+</div>
+<div id="divChatContainer">
+<div id="divChat"></div>
+<div id="divSendMessage">
+    <input type="text" id="txtMessage" />
+    <input type="button" value="send" id="btnSend" />
+</div>
+</div>
+</body>
+</html>

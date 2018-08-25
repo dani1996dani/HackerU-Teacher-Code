@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Server</title>
+    <style>
+        #divMessages{
+            overflow-y: auto;
+            height: 300px;
+            width: 600px;
+            border: 1px solid black;
+            margin: auto;
+        }
+        #divChat{
+            display: none;
+        }
+    </style>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script>
+
+        var userName;
+        var password;
+        var messages = [];
+
+        function signupLogin(signupOrLogin) {
+            userName = $("#txtUserName").val();
+            password = $("#txtPassword").val();
+            if(userName.length == 0 || password.length == 0)
+                return;
+            $.get("ChatServlet?action="+signupOrLogin+"&username="+userName +"&password="+password, function (data, status) {
+                if(status == "success" && data == "OK"){
+                    $("#divLogin").hide();
+                    $("#divChat").show();
+                    pullMessages();
+                }
+            });
+        }
+
+        function pullMessages() {
+            $.get("ChatServlet?action=pull&username="+userName+"&password="+password+"&from="+messages.length, function (data, status) {
+                if(status == "success"){
+                    var newMessages = JSON.parse(data);
+                    for(var i=0;i<newMessages.length;i++){
+                        messages.push(newMessages[i]);
+                    }
+                    if(newMessages.length > 0)
+                        renderMessages();
+                }
+                setTimeout(pullMessages, 1000);
+            });
+        }
+
+        function renderMessages() {
+            var str = "";
+            for(var i=0;i<messages.length;i++){
+                str += "<div>";
+                str += messages[i].sender +": " + messages[i].content;
+                str += "</div>";
+            }
+            $("#divMessages").html(str);
+        }
+
+        function btnSendMessage() {
+            var message = $("#txtMessage").val();
+            if(message.length == 0)
+                return;
+            $.get("ChatServlet?action=send&username="+userName+"&password="+password+"&content="+message,function (data, status) {
+                if(status == "success" && data == "OK"){
+                    $("#txtMessage").val("");
+                    $("#txtMessage").focus();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<h1>welcome to my chat server</h1>
+<div id="divLogin">
+    username:<br/><input type="text" id="txtUserName"/>
+    <br/>
+    password:<br/><input type="password" id="txtPassword" />
+    <br/>
+    <button onclick="signupLogin('signup')">signup</button>
+    <button onclick="signupLogin('login')">login</button>
+</div>
+<div id="divChat">
+    <h2>messages:</h2>
+    <div id="divMessages"></div>
+    <input type="text" id="txtMessage"><button onclick="btnSendMessage()">send</button>
+</div>
+</body>
+</html>

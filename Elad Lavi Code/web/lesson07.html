@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JSON</title>
+  <script>
+
+    var x = {
+      userName: "elad",
+      password: "12345",
+      age: 36,
+      dog: {
+        dogName: "Snoopy",
+        age: 5
+      },
+      lastVisits: [5,3,6,3,2,2,45,6,67]
+    };
+    var y = JSON.stringify(x);
+    var z = JSON.parse(y);
+    alert(z.lastVisits[2]);
+    //localStorage.setItem("test", x);
+    //var y = localStorage.getItem("test");
+    //alert(y);
+
+
+
+
+
+  </script>
+</head>
+
+<body>
+</body>
+</html>
